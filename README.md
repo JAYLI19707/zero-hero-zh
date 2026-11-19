@@ -25,6 +25,50 @@ This repository contains study notes, experiments, and code implementations for 
 5. [`Activations/`](Activations/)
    - BatchNorm, activation distributions, and gradient-flow experiments
    - A continuation of the `makemore` MLP lessons
+6. [`tokenizer/`](tokenizer/)
+   - From-scratch tokenizer concepts and BPE/subword experiments
+   - A ByteLevel BPE tokenizer training script compatible with Hugging Face
+   - Chat template and next-token prediction data-pipeline examples
+
+## Project relationship
+
+The projects build from the basic components of neural networks toward language
+model training and inference:
+
+```mermaid
+flowchart LR
+    A[micrograd<br/>autograd] --> B[bigram<br/>language model]
+    B --> C[MLP<br/>character model]
+    C --> D[Activations<br/>BatchNorm]
+    D --> E[tokenizer<br/>BPE and data pipeline]
+    E --> F[gpt-2<br/>mini GPT]
+    D -.-> F
+```
+
+`tokenizer/` focuses on converting text into token IDs and preparing
+input-target sequences, while `gpt-2/` consumes tokenized sequences to train a
+Transformer language model.
+
+## Custom tokenizer demo
+
+The [`tokenizer/train_tokenizer.py`](tokenizer/train_tokenizer.py) script trains
+a 6,400-token ByteLevel BPE tokenizer from
+[`tokenizer/dataset/pretrain_hq.jsonl`](tokenizer/dataset/pretrain_hq.jsonl).
+It reserves `<|endoftext|>`, `<|im_start|>`, and `<|im_end|>` for ChatML-style
+conversation formatting, writes Hugging Face-compatible configuration files,
+and verifies encode/decode plus chat-template behavior.
+
+The training corpus is intentionally not tracked in Git because of its size.
+Place the JSONL file at the path above before running the script:
+
+```bash
+cd tokenizer
+pip install tokenizers transformers
+python train_tokenizer.py
+```
+
+The generated tokenizer files are written to the repository-level `model/`
+directory, which is ignored by Git.
 
 ## GPT-2 mini demo
 

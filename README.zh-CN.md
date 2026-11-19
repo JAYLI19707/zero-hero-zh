@@ -25,6 +25,46 @@
 5. [`Activations/`](Activations/)
    - BatchNorm、激活值分布和梯度传播实验
    - `makemore` MLP 课程的延伸内容
+6. [`tokenizer/`](tokenizer/)
+   - 从零理解 Tokenizer、BPE 和子词分词
+   - 使用 ByteLevel BPE 训练兼容 Hugging Face 的分词器
+   - Chat Template 和下一个 Token 预测数据管道示例
+
+## 项目关系图
+
+这些项目从神经网络基础组件逐步扩展到语言模型的训练与推理：
+
+```mermaid
+flowchart LR
+    A[micrograd<br/>自动求导] --> B[bigram<br/>语言模型]
+    B --> C[MLP<br/>字符模型]
+    C --> D[Activations<br/>BatchNorm]
+    D --> E[tokenizer<br/>BPE 与数据管道]
+    E --> F[gpt-2<br/>迷你 GPT]
+    D -.-> F
+```
+
+`tokenizer/` 负责把文本转换成 Token ID 并准备输入-目标序列，
+`gpt-2/` 则使用这些序列训练 Transformer 语言模型。
+
+## 自定义 Tokenizer Demo
+
+[`tokenizer/train_tokenizer.py`](tokenizer/train_tokenizer.py) 会从
+[`tokenizer/dataset/pretrain_hq.jsonl`](tokenizer/dataset/pretrain_hq.jsonl)
+训练一个包含 6,400 个词条的 ByteLevel BPE 分词器。脚本会预留
+`<|endoftext|>`、`<|im_start|>` 和 `<|im_end|>` 这三个 ChatML 对话控制符，
+生成 Hugging Face 兼容的配置文件，并验证 Chat Template 以及编解码流程。
+
+由于训练语料体积较大，JSONL 数据不会提交到 Git。运行前请将数据放置在
+上述路径：
+
+```bash
+cd tokenizer
+pip install tokenizers transformers
+python train_tokenizer.py
+```
+
+生成的分词器文件会写入仓库根目录的 `model/` 文件夹，该文件夹已被 Git 忽略。
 
 ## GPT-2 迷你 Demo
 
