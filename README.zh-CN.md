@@ -55,11 +55,15 @@ flowchart LR
 `<|endoftext|>`、`<|im_start|>` 和 `<|im_end|>` 这三个 ChatML 对话控制符，
 生成 Hugging Face 兼容的配置文件，并验证 Chat Template 以及编解码流程。
 
-由于训练语料体积较大，JSONL 数据不会提交到 Git。运行前请将数据放置在
-上述路径：
+由于训练语料体积较大，JSONL 数据不会提交到 Git。`pretrain_hq.jsonl`
+来自 ModelScope 上的
+[MiniMind-Dataset](https://www.modelscope.cn/datasets/gongjy/MiniMind-Dataset)。
+运行前请将数据下载到上述路径：
 
 ```bash
 cd tokenizer
+pip install modelscope
+modelscope download --dataset gongjy/MiniMind-Dataset pretrain_hq.jsonl --local_dir dataset
 pip install tokenizers transformers
 python train_tokenizer.py
 ```

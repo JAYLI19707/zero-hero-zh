@@ -59,10 +59,15 @@ conversation formatting, writes Hugging Face-compatible configuration files,
 and verifies encode/decode plus chat-template behavior.
 
 The training corpus is intentionally not tracked in Git because of its size.
-Place the JSONL file at the path above before running the script:
+The `pretrain_hq.jsonl` file comes from the
+[MiniMind-Dataset](https://www.modelscope.cn/datasets/gongjy/MiniMind-Dataset)
+dataset on ModelScope. Download it into the path above before running the
+script:
 
 ```bash
 cd tokenizer
+pip install modelscope
+modelscope download --dataset gongjy/MiniMind-Dataset pretrain_hq.jsonl --local_dir dataset
 pip install tokenizers transformers
 python train_tokenizer.py
 ```

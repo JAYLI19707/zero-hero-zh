@@ -134,6 +134,7 @@ BPE 是一种具体的 Sub-word 分词算法，广泛用于 GPT 和 Transformer 
 
 1.  **数据流 (Data Pipeline)**
     - 使用 Python Generator (`yield`) 逐行读取大规模 JSONL 数据。这避免了将整个几 GB 的数据集一次性加载到内存中，是处理海量数据的标准做法。
+    - 本项目使用的 `pretrain_hq.jsonl` 来自 [ModelScope MiniMind-Dataset](https://www.modelscope.cn/datasets/gongjy/MiniMind-Dataset)。该文件不会提交到 Git，请先下载到 `dataset/` 目录。
 
 2.  **BPE 模型初始化**
     - **ByteLevel Pre-tokenizer**: 使用字节级预分词。这是 GPT-2/GPT-3/Llama 等模型的核心技巧。它直接对 UTF-8 字节进行编码，而不是 Unicode 字符。这意味着理论上它支持人类所有的语言和符号（包括 Emoji），彻底解决了 Unknown Token (`<|unk|>`) 问题。
