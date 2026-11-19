@@ -22,6 +22,9 @@ This repository contains study notes, experiments, and code implementations for 
 4. [`gpt-2/`](gpt-2/)
    - A character-level mini GPT built from scratch with PyTorch
    - Transformer, self-attention, training, and text generation walkthrough
+5. [`Activations/`](Activations/)
+   - BatchNorm, activation distributions, and gradient-flow experiments
+   - A continuation of the `makemore` MLP lessons
 
 ## GPT-2 mini demo
 
@@ -35,12 +38,22 @@ pip install torch matplotlib numpy
 
 The dataset is included as [`gpt-2/input.txt`](gpt-2/input.txt), so no additional download is required.
 
+## Activations and BatchNorm experiments
+
+The [`Activations/`](Activations/) folder contains two complementary notebooks and the `makemore` names dataset:
+
+- [`makemore_part3_bn.ipynb`](Activations/makemore_part3_bn.ipynb) is the main learning notebook. It revisits the character-level MLP, adds BatchNorm, implements a small neural-network API, trains the model, and visualizes activation statistics.
+- [`test.ipynb`](Activations/test.ipynb) is a separate one-cell statistics experiment. It generates heteroscedastic data, fits a linear regression, and plots residuals. It is useful for regression diagnostics, but it is unrelated to the main `makemore` training flow.
+- [`names.txt`](Activations/names.txt) is the names dataset used by the `makemore` notebook.
+
+Run `makemore_part3_bn.ipynb` first if you want to follow the main learning path. The `makemore` notebook requires PyTorch and Matplotlib; the separate statistics notebook requires `numpy`, `pandas`, `matplotlib`, `scipy`, and `statsmodels`.
+
 ## Learning path
 
-The projects are arranged from simple scalar automatic differentiation to language modeling:
+The main projects are arranged from simple scalar automatic differentiation to language modeling:
 
 ```text
-micrograd -> bigram -> MLP -> mini GPT
+micrograd -> bigram -> MLP -> Activations/BatchNorm -> mini GPT
 ```
 
 欢迎学习与交流！
