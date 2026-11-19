@@ -1,2 +1,3 @@
 tokenizer/dataset/*.jsonl
+!tokenizer/dataset/sample_pretrain_hq.jsonl
 model/

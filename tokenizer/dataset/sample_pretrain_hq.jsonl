@@ -1,0 +1,3 @@
+{"text":"<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n你好，请介绍一下 Byte Pair Encoding。<|im_end|>\n<|im_start|>assistant\nByte Pair Encoding 会反复合并语料中最常见的相邻符号对，逐步构建子词词表。<|im_end|>"}
+{"text":"<|im_start|>user\nWhat is next-token prediction?<|im_end|>\n<|im_start|>assistant\nIt trains a language model to predict the next token from the preceding context.<|im_end|>"}
+{"text":"<|im_start|>user\nTokenizer 的作用是什么？<|im_end|>\n<|im_start|>assistant\nTokenizer 将文本转换为模型可以处理的 token ID 序列，并支持将 token ID 解码回文本。<|im_end|>"}
